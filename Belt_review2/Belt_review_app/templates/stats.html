@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" lang="eng">
+	<title>The Wishing App</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'Belt_review_app/css/home.css' %}">
+</head>
+<body>
+	<a href="/home">Dashboard</a>
+	<a href="">Logout</a>
+	<h3>Hello {{loggedinUser.first_name}}! These are your stats!</h3>
+	<br>
+	<h4>Total wishes granted so far for all users: INSERT COUNT HERE</h4>
+	<br>
+	
+	<p>Your granted wishes:{% for wish in wishes%} {% if wish.granted == True %} {{loggedinUser.wish.count}} 3 {% endif %} {% endfor %}</p>
+	
+	
+	<p>Your pending wishes:{% if wish.granted == False %} INSERT COUNT HERE{% endif %}</p>
+<h1>{{loggedinUser.wish.count}}</h1>
+<!-- {% for wish in wishes %} -->
+<h1>{{wish.granted}}</h1>
+<!-- {% endfor %} -->
+
+
+</body>
+</html>

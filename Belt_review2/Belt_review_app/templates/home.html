@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" lang="eng">
+	<title>The Wishing App</title>
+		{% load static %}
+	<link rel="stylesheet" href="{% static 'Belt_review_app/css/home.css' %}">
+</head>
+<body>
+	<h1>Hello {{loggedinUser.first_name}}!</h1>
+	<a href="">Logout</a>
+	<a href="/stats/{{loggedinUser.id}}">View stats</a>
+	<a href="/wish/{{loggedinUser.id}}">Make a Wish!</a>
+
+	<p>Your wish list:</p>
+<table>
+  <tr>
+	<th>Item</th>
+	<th>Date added</th>
+	<th>Actions</th>
+  </tr>
+  <tr>
+	{% for wishes in user_wishes %}
+	{% if wishes.granted == False %}
+	<td>{{wishes.item}}</td>
+	 <td>{{wishes.created_at}}</td>
+	 <td>
+		<a href="/boop/{{wishes.id}}">Remove</a>
+		<a href="/editwish/{{wishes.id}}">Edit</a>
+		<a href="/grant/{{wishes.id}}">Granted!</a>
+	</td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+  
+</table>
+
+	<p>Granted wishes:</p>
+<table>
+  <tr>
+	<th>Item</th>
+	<th>Wisher</th>
+	<th>Date added</th>
+	<th>Date Granted</th>
+	<th>Likes</th>
+	<th>Actions</th>
+  </tr>
+  <tr>
+	{% for wishes in all_wishes %}
+	{% if wishes.granted == True %}
+	<td>{{wishes.item}}</td>
+	<td>{{wishes.user.first_name}}</td>
+	<td>{{wishes.created_at}}</td>
+	<td>{{wishes.updated_at}}</td>
+	<td>{{wishes.likes}}</td>
+	{% if wishes.user.id != loggedinUser.id %}
+	<td><a href="">Like</a></td>
+	{% endif %}
+	{% endif %}
+	{% endfor %}
+  </tr>
+</table>
+</body>
+</html>	

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" lang="eng">
+	<title>The Wishing App</title>
+		{% load static %}
+	<link rel="stylesheet" href="{% static 'Belt_review_app/css/home.css' %}">
+</head>
+<body>
+	<h1>Hello {{loggedinUser.first_name}}! Let's edit your wish!</h1>
+	<a href="">Logout</a>
+	<div class="container">
+		<form action="/edit/{{wish_to_edit.id}}" method="post">
+			{% csrf_token %}
+			I wish for:<input type="text" name="item" placeholder="{{wish_to_edit.item}}">
+			<br>
+			Description:<input type="text" name="description" placeholder="{{wish_to_edit.description}}">
+			<br>
+			<button formaction="/home">Cancel</button>
+			<input type="submit" name="" value="Edit">
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" lang="eng">
+	<title>The Wishing App</title>
+		{% load static %}
+	<link rel="stylesheet" href="{% static 'Belt_review_app/css/home.css' %}">
+</head>
+<body>
+	<h1>Welcome! Sign in to make a wish!</h1>
+	<div class="register">
+		<h4>Register</h4>
+		<br>
+		<form action="/newUser" method="post">
+			{% csrf_token %}
+			First name:<input type="text" name="first_name">
+			<br>
+			Last name:<input type="text" name="last_name">
+			<br>
+			Email:<input type="text" name="email">
+			<br>
+			Password:<input type="password" name="password">
+			<br>
+			Confirm pw:<input type="password" name="confirmpw">
+			<input type="submit" name="" value="Register">
+		</form>	
+	</div>
+
+	{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+
+	<div class="login">
+		<h4>Login</h4>
+		<br>
+		<form action="/login" method="post">
+			{% csrf_token %}
+			Email:<input type="text" name="email">
+			<br>
+			Password:<input type="password" name="password">
+			<input type="submit" name="" value="Login">
+		</form>
+	</div>
+</body>
+</html>
